@@ -2,7 +2,46 @@ import React, { Component } from 'react';
 import Footer from '../../componentes/Footer/Footer';
 
 class Eventos extends Component {
+  constructor() {
+    super();
+    this.state = {
+      lista: [],
+      nome: "",
+      acessoLivre: "",
+      TipoEvento:""
+    }
+  }
+
+
+  UNSAFE_componentWillMount() {
+    document.title = this.props.titulo_pagina;
+    console.log("Carregando");
+  }
+
+  componentDidMount() {
+    console.log("Carregado");
+    console.log(this.state.lista);
+    this.listaAtualizada();
+  }
+
+  componentDidUpdate() {
+    console.log("Atualizando");
+  }
+
+  componentWillUnmount() {
+    console.log("Saindo");
+  }
+
+  // GET - listar
+  listaAtualizada = () => {
+    fetch("http://localhost:5000/api/evento")
+      .then(response => response.json())
+      .then(data => this.setState({ lista: data }))
+  }
+
+
   render() {
+
     return (
       <div>
         <main className="conteudoPrincipal">
@@ -20,7 +59,21 @@ class Eventos extends Component {
                   </tr>
                 </thead>
 
-                <tbody id="tabela-lista-corpo"></tbody>
+                <tbody id="tabela-lista-corpo">
+                  {
+                    this.state.lista.map(function (evento) {
+                      return (
+                        <tr key={evento.eventoId}>
+                          <td>{evento.eventoId}</td>
+                          <td>{evento.titulo}</td>
+                          <td>{evento.dataEvento}</td>
+                          <td>{evento ? 'livre' : 'Restrito'}</td>
+                          
+                        </tr>
+                      );
+                    })
+                  }
+                </tbody>
               </table>
             </div>
 

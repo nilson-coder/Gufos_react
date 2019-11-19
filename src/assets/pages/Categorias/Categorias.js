@@ -26,7 +26,13 @@ class Categorias extends Component {
       editarModal: {
         categoriaId: "",
         titulo: ""
-      }
+      },
+
+      // criando um estado para verificar carregamento
+      loading : false,
+
+      erroMsg : ""
+      
     }
 
     // Damos o bind quando não usamos arrow function
@@ -60,9 +66,19 @@ class Categorias extends Component {
 
   // GET - listar
   listaAtualizada = () => {
+
+    //Habilita o icone de carregando
+    this.setState({ loading : true });
+
     fetch("http://localhost:5000/api/categoria")
       .then(response => response.json())
       .then(data => this.setState({ lista: data }))
+
+    //desabilitamos o icone de carregando apos 2 segundo
+    setTimeout(() => {
+      this.setState({loading : false});
+    }, 2000)
+
   }
 
   // POST - Cadastrar
@@ -92,7 +108,9 @@ class Categorias extends Component {
   // DELETE - Delete categoria
   deletarCategoria = (id) => {
     
-    console.log("Excluindo");
+    console.log(id);
+
+    this.setState({ erroMsg: ""})
 
     fetch("http://localhost:5000/api/categoria/" + id, {
       method: "DELETE",
@@ -105,18 +123,21 @@ class Categorias extends Component {
         console.log(response);
         this.listaAtualizada();
       })
-      .catch(error => console.log(error))
+      .catch(error =>{ 
+        console.log(error);
+        this.setState({ erroMsg: "Não é possivel excluir esta categoria verifique se não há eventos que a utilizem"})
+      })
   }
 
   // Acionado quando clicamos no botão Editar para capturar
-  // e salvr no state os dados atuais
+  // e salver no state os dados atuais
   alterarCategoria = (categoria) => {
     console.log(categoria);
 
 
     this.setState({
       editarModal: {
-        categoria: categoria.categoriaId,
+        categoria: this.state.editarModal.categoriaId,
         titulo: categoria.titulo
       }
     })
@@ -203,6 +224,13 @@ class Categorias extends Component {
                   }
                 </tbody>
               </table>
+
+              {/* Verifica e caso haja uma msg de erro ele mostra abaixo da tabela */}
+              { this.state.erroMsg && <div className="text-danger"> {this.state.erroMsg} </div>}
+
+              {/* Verifica se o estado de loading está como true e mostra o icone carregando */}
+              { this.state.loading && <i className="fas fa-spinner fa-spin fa-2x blue-text"></i> }
+
             </div>
 
             <div className="container" id="conteudoPrincipal-cadastro">
