@@ -1,9 +1,14 @@
 import React from 'react';
-import Footer from '../../componentes/Footer/Footer';
+import './App.css';
+// Importamos nosso componente
+import Rodape from './components/Rodape/Rodape';
+import Cabecalho from './components/Cabecalho/Cabecalho';
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <Cabecalho/>
+
       <section className="conteudoImagem">
         <div>
           <h1>Gufos</h1>
@@ -13,42 +18,42 @@ function App() {
 
       <main className="conteudoPrincipal">
         <section id="conteudoPrincipal-eventos">
-          <h1 id="conteudoPrincipal-eventos-titulo">Próximos Eventos</h1>
+          <h1 id="conteudoPrincipal-eventos-titulo">Opiniões</h1>
           <div className="container">
             <nav>
               <ul className="conteudoPrincipal-dados">
                 <li className="conteudoPrincipal-dados-link eventos">
-                  <h2>Título do Evento</h2>
+                  <h2>Pessoa A</h2>
                   <p>
-                    Breve descrição sobre o evento. Lorem ipsum lorem ipsum
-                    lorem ipsum.
+                    Breve descrição sobre a opinião A. Lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum.
                   </p>
                   <button>conectar</button>
                 </li>
 
                 <li className="conteudoPrincipal-dados-link eventos">
-                  <h2>Título do Evento</h2>
+                  <h2>Pessoa B</h2>
                   <p>
-                    Breve descrição sobre o evento. Lorem ipsum lorem ipsum
-                    lorem ipsum.
+                    Breve descrição sobre a opinião B. Lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum.
                   </p>
                   <button>conectar</button>
                 </li>
 
                 <li className="conteudoPrincipal-dados-link eventos">
-                  <h2>Título do Evento</h2>
+                  <h2>Pessoa C</h2>
                   <p>
-                    Breve descrição sobre o evento. Lorem ipsum lorem ipsum
-                    lorem ipsum.
+                    Breve descrição sobre a opinião C. Lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum.
                   </p>
                   <button>conectar</button>
                 </li>
 
                 <li className="conteudoPrincipal-dados-link eventos">
-                  <h2>Título do Evento</h2>
+                  <h2>Pessoa D</h2>
                   <p>
-                    Breve descrição sobre o evento. Lorem ipsum lorem ipsum
-                    lorem ipsum.
+                    Breve descrição sobre a opinião D. Lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum.
                   </p>
                   <button>conectar</button>
                 </li>
@@ -80,8 +85,11 @@ function App() {
           </div>
         </section>
       </main>
-    <Footer escola="SENAC" />
+
+      <Rodape />
+     
     </div>
+
   );
 }
 
